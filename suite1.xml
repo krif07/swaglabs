@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Purchase order tests">
+    <listeners>
+        <listener class-name="org.testng.reporters.XMLReporter">
+            <parameter name="outputDirectory" value="test-results"/>
+        </listener>
+        <listener class-name="org.testng.reporters.JUnitXMLReporter">
+            <parameter name="outputDirectory" value="test-results"/>
+        </listener>
+    </listeners>
+    <test name="Create orders" thread-count="3" parallel="true">
+        <classes>
+            <class name="edit.tests.CheckoutTests"/>
+            <class name="edit.tests.LoginTests"/>
+        </classes>
+    </test>
+</suite>

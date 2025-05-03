@@ -16,4 +16,11 @@ public class LoginTests extends Hooks {
         InventoryPage inventoryPage = loginPage.loginSwagLabs("standard_user", "secret_sauce");
         Assert.assertEquals("Products", inventoryPage.getTitle());
     }
+    @Test(priority = 2)
+    void testUnSuccessfulLogin() {
+        LoginPage loginPage = new LoginPage();
+        loginPage.navigateTo(ReadProperties.getURL());
+        InventoryPage inventoryPage = loginPage.loginSwagLabs("standard_user", "secret_sauc");
+        Assert.assertEquals("Products", inventoryPage.getTitle());
+    }
 }

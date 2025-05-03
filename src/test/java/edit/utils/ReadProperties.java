@@ -9,6 +9,7 @@ public class ReadProperties {
     private static String URL;
     private static int WAIT_TIME_OUT;
     private static String TAKE_PICTURES;
+    private static String ENVIRONMENT;
 
     public static void setupProperties() {
         Properties properties = new Properties();
@@ -22,6 +23,7 @@ public class ReadProperties {
             String time = properties.getProperty("wait.timeout.seconds").trim();
             WAIT_TIME_OUT = Integer.parseInt(time);
             TAKE_PICTURES = properties.getProperty("take.pictures");
+            ENVIRONMENT = properties.getProperty("environment");
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -39,4 +41,5 @@ public class ReadProperties {
     public static String getTakePictures() {
         return TAKE_PICTURES;
     }
+    public static String getEnvironment() { return ENVIRONMENT; }
 }

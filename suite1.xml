@@ -2,12 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Purchase order tests">
     <listeners>
-        <listener class-name="org.testng.reporters.XMLReporter">
-            <parameter name="outputDirectory" value="test-results"/>
-        </listener>
-        <listener class-name="org.testng.reporters.JUnitXMLReporter">
-            <parameter name="outputDirectory" value="test-results"/>
-        </listener>
+        <listener class-name="edit.listeners.ExtentReportListener"/>
     </listeners>
     <test name="Create orders" thread-count="3" parallel="true">
         <classes>

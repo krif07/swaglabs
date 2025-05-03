@@ -15,6 +15,7 @@
     <logback.version>1.5.18</logback.version>
     <testng.version>7.11.0</testng.version>
     <commonsio.version>2.19.0</commonsio.version>
+    <extentreports.version>5.1.2</extentreports.version>
   </properties>
 
   <dependencies>
@@ -44,6 +45,13 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>${commonsio.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+    <dependency>
+      <groupId>com.aventstack</groupId>
+      <artifactId>extentreports</artifactId>
+      <version>${extentreports.version}</version>
     </dependency>
 
   </dependencies>

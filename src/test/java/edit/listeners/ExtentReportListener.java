@@ -65,7 +65,7 @@ public class ExtentReportListener implements ITestListener {
             String screenPath = ScreenshotHelper.captureScreenshot(
                     DriverFactory.getDriver(), result.getMethod().getMethodName());
             if(screenPath != null) {
-                test.get().addScreenCaptureFromPath(screenPath, "Screenshot Pass");
+                test.get().addScreenCaptureFromPath("." + screenPath, "Screenshot Pass");
                 evidenceDocument.createBlueSubTitle("Test completado correctamente");
                 evidenceDocument.createParagraph(
                         result.getMethod().getMethodName() + " - " + result.getMethod().getDescription());
@@ -82,7 +82,7 @@ public class ExtentReportListener implements ITestListener {
         String screenshotPath = ScreenshotHelper.captureScreenshot(
                 DriverFactory.getDriver(), result.getMethod().getMethodName());
         if(screenshotPath != null) {
-            test.get().addScreenCaptureFromPath(screenshotPath, "Screenshot Failed");
+            test.get().addScreenCaptureFromPath("." + screenshotPath, "Screenshot Failed");
             evidenceDocument.createRedSubTitle("Test fallido");
             evidenceDocument.createParagraph(
                     result.getMethod().getMethodName() + " - " + result.getMethod().getDescription());

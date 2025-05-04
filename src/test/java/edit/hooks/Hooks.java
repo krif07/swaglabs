@@ -24,8 +24,4 @@ public class Hooks {
         DriverFactory.cleanupDriver();
     }
 
-    @AfterSuite
-    public void afterSuite() {
-        
-    }
 }

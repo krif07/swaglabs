@@ -7,6 +7,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import edit.driver.DriverFactory;
+import edit.utils.DocumentHelper;
 import edit.utils.ReadProperties;
 import edit.utils.ScreenshotHelper;
 import org.openqa.selenium.WebDriver;
@@ -55,6 +56,13 @@ public class ExtentReportListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         test.get().log(Status.PASS, "Test completado correctamente");
+        if(ReadProperties.getTakePictures().equals("EVERY_STEP")) {
+            String screenPath = ScreenshotHelper.captureScreenshot(
+                    DriverFactory.getDriver(), result.getMethod().getMethodName());
+            if(screenPath != null) {
+                test.get().addScreenCaptureFromPath(screenPath, "Screenshot Pass");
+            }
+        }
     }
 
     @Override
@@ -65,7 +73,8 @@ public class ExtentReportListener implements ITestListener {
         String screenshotPath = ScreenshotHelper.captureScreenshot(
                 DriverFactory.getDriver(), result.getMethod().getMethodName());
         if(screenshotPath != null) {
-            test.get().addScreenCaptureFromPath(screenshotPath, "Screenshot");
+            test.get().addScreenCaptureFromPath(screenshotPath, "Screenshot Failed");
+            DocumentHelper.createDocument(screenshotPath);
         }
     }
 

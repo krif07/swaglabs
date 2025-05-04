@@ -1,6 +1,7 @@
 package edit.hooks;
 
 import edit.driver.DriverFactory;
+import edit.utils.DocumentHelper;
 import edit.utils.ReadProperties;
 import org.testng.annotations.*;
 
@@ -22,5 +23,10 @@ public class Hooks {
     @AfterMethod
     public void tearDown() {
         DriverFactory.cleanupDriver();
+    }
+
+    @AfterSuite
+    public void afterSuite() {
+        
     }
 }

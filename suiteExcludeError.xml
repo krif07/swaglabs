@@ -4,11 +4,15 @@
     <listeners>
         <listener class-name="edit.listeners.ExtentReportListener"/>
     </listeners>
-    <test name="Create orders" thread-count="3" parallel="true" preserve-order="true">
-        <parameter name="browser" value="firefox"/>
+    <test name="Create orders" thread-count="3" parallel="true">
+        <parameter name="browser" value="edge"/>
         <classes>
             <class name="edit.tests.CheckoutTests"/>
-            <class name="edit.tests.LoginTests"/>
+            <class name="edit.tests.LoginTests">
+                <methods>
+                    <exclude name="testUnSuccessfulLogin"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

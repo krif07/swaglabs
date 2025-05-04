@@ -42,4 +42,7 @@ public class ReadProperties {
         return TAKE_PICTURES;
     }
     public static String getEnvironment() { return ENVIRONMENT; }
+    public static void setBrowserType(String browser) {
+        BROWSER_TYPE = browser;
+    }
 }

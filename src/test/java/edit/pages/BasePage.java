@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,7 +19,8 @@ public class BasePage {
     public BasePage() {
         driver = DriverFactory.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(ReadProperties.getWaitTimeOut()));
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(
+                new AjaxElementLocatorFactory(driver, ReadProperties.getWaitTimeOut()), this);
     }
     public void navigateTo(String url) {
         driver.get(url);

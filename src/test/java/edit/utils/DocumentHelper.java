@@ -14,85 +14,85 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class DocumentHelper {
-    public static void createDocument(String imagePath) {
-        XWPFDocument document = new XWPFDocument();
+    XWPFDocument document;
 
-        try {
-            // 1. Crear el título
-            XWPFParagraph paragraphTitle = document.createParagraph();
-            paragraphTitle.setAlignment(ParagraphAlignment.CENTER);
+    public DocumentHelper() {
+        document = new XWPFDocument();
+    }
 
-            XWPFRun runTitle = paragraphTitle.createRun();
-            runTitle.setText("DOCUMENTO DE EVIDENCIAS");
-            runTitle.setBold(true);
-            runTitle.setFontSize(16);
-            runTitle.setFontFamily("Arial");
-            runTitle.setColor("2F5496");
-            runTitle.addBreak();
+    public void createTitle(String title) {
+        XWPFParagraph paragraphTitle = document.createParagraph();
+        paragraphTitle.setAlignment(ParagraphAlignment.CENTER);
 
-            // 2. Crear un subtítulo
-            XWPFParagraph paragraphSubTitle = document.createParagraph();
-            paragraphSubTitle.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun runTitle = paragraphTitle.createRun();
+        runTitle.setText(title);
+        runTitle.setBold(true);
+        runTitle.setFontSize(16);
+        runTitle.setFontFamily("Arial");
+        runTitle.setColor("2F5496");
+        runTitle.addBreak();
+    }
+    public void createSubtitle(String subtitle) {
+        XWPFParagraph paragraphSubTitle = document.createParagraph();
+        paragraphSubTitle.setAlignment(ParagraphAlignment.CENTER);
 
-            XWPFRun subTitleRun = paragraphSubTitle.createRun();
-            subTitleRun.setText("Errores encontrados");
-            subTitleRun.setItalic(true);
-            subTitleRun.setFontSize(12);
-            subTitleRun.setFontFamily("Calibri");
-            subTitleRun.addBreak();
-            subTitleRun.addBreak();
+        XWPFRun subTitleRun = paragraphSubTitle.createRun();
+        subTitleRun.setText(subtitle);
+        subTitleRun.setItalic(true);
+        subTitleRun.setFontSize(12);
+        subTitleRun.setFontFamily("Calibri");
+        subTitleRun.addBreak();
+        subTitleRun.addBreak();
+    }
+    public void createParagraph(String paragraph) {
+        XWPFParagraph finalParagraph = document.createParagraph();
+        XWPFRun finalRun = finalParagraph.createRun();
+        finalRun.setText(paragraph);
+    }
+    public void createRedSubTitle(String paragraph) {
+        XWPFParagraph subtitle = document.createParagraph();
+        XWPFRun finalRun = subtitle.createRun();
+        finalRun.setColor("FF0000");
+        finalRun.setFontSize(14);
+        finalRun.setItalic(true);
+        finalRun.setText(paragraph);
+    }
+    public void createBlueSubTitle(String paragraph) {
+        XWPFParagraph subtitle = document.createParagraph();
+        XWPFRun finalRun = subtitle.createRun();
+        finalRun.setColor("2F5496");
+        finalRun.setFontSize(14);
+        finalRun.setItalic(true);
+        finalRun.setText(paragraph);
+    }
+    public void addImage(String imagePath) {
+        XWPFParagraph imageParagraph = document.createParagraph();
+        imageParagraph.setAlignment(ParagraphAlignment.CENTER);
 
-            // 3. Crear un párrafo normal
-            XWPFParagraph normalParagraph = document.createParagraph();
-            normalParagraph.setAlignment(ParagraphAlignment.BOTH);
+        XWPFRun imageRun = imageParagraph.createRun();
 
-            XWPFRun normalParagraphRun = normalParagraph.createRun();
-            normalParagraphRun.setText(
-                    "La siguiente es la lista de las pruebas que fallaron por algún motivo. Se adjunta imagen");
-            normalParagraphRun.setFontSize(11);
-            normalParagraphRun.setFontFamily("Calibri");
-            normalParagraphRun.addBreak();
-            normalParagraphRun.addBreak();
-
-            // 5. Añadir una imagen
-            XWPFParagraph parrafoImagen = document.createParagraph();
-            parrafoImagen.setAlignment(ParagraphAlignment.CENTER);
-
-            XWPFRun imageRun = parrafoImagen.createRun();
-            //String imagePath = "./test-results/screenshots/" + imagePath;
-
-            try (InputStream imagenStream = Files.newInputStream(Paths.get(imagePath))) {
-                imageRun.addPicture(
-                        imagenStream,
-                        XWPFDocument.PICTURE_TYPE_PNG,
-                        "error",
-                        Units.toEMU(400),
-                        Units.toEMU(300)
-                );
-            } catch (Exception e) {
-                System.out.println("No se pudo cargar la imagen: " + e.getMessage());
-                // Si no se puede cargar la imagen, añadimos un texto alternativo
-                imageRun.setText("[Aquí debería aparecer una imagen]");
-                imageRun.setItalic(true);
-            }
-
-            imageRun.addBreak();
-            imageRun.addBreak();
-
-            // 6 Añadir un párrafo final
-            XWPFParagraph finalParagraph = document.createParagraph();
-            XWPFRun finalRun = finalParagraph.createRun();
-            finalRun.setText("Fin del documento de ejemplo. Apache POI permite generar documentos DOCX " +
-                    "con múltiples formatos y elementos como los que se han mostrado en este ejemplo.");
-
-            // 7 Guardar el documento
-            FileOutputStream salida = new FileOutputStream("Evidencias.docx");
+        try (InputStream imageStream = Files.newInputStream(Paths.get(imagePath))) {
+            imageRun.addPicture(
+                    imageStream,
+                    XWPFDocument.PICTURE_TYPE_PNG,
+                    "error",
+                    Units.toEMU(500),
+                    Units.toEMU(400)
+            );
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar la imagen: " + e.getMessage());
+            imageRun.setText("[Aquí debería aparecer una imagen]");
+            imageRun.setItalic(true);
+        }
+        imageRun.addBreak();
+        imageRun.addBreak();
+    }
+    public void saveDocument(String documentName) {
+        try{
+            FileOutputStream salida = new FileOutputStream(documentName + ".docx");
             document.write(salida);
             document.close();
             salida.close();
-
-            System.out.println("Documento creado exitosamente.");
-
         } catch (IOException e) {
             System.err.println("Error al crear el documento: " + e.getMessage());
         }

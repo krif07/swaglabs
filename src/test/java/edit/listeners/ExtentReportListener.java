@@ -24,6 +24,7 @@ public class ExtentReportListener implements ITestListener {
     private ThreadLocal<ExtentTest> test = new ThreadLocal<>();
     private static final String OUTPUT_FOLDER = "./test-results/";
     private static final String FILE_NAME = "ExtentReport.html";
+    private DocumentHelper evidenceDocument;
 
     @Override
     public void onStart(ITestContext context) {
@@ -45,6 +46,10 @@ public class ExtentReportListener implements ITestListener {
         extent.setSystemInfo("Environment", ReadProperties.getEnvironment());
         extent.setSystemInfo("Browser", ReadProperties.getBrowserType());
         extent.setSystemInfo("OS", System.getProperty("os.name"));
+
+        evidenceDocument = new DocumentHelper();
+        evidenceDocument.createTitle("Documento de evidencias");
+        evidenceDocument.createSubtitle("Resumen de las pruebas");
     }
 
     @Override
@@ -61,6 +66,10 @@ public class ExtentReportListener implements ITestListener {
                     DriverFactory.getDriver(), result.getMethod().getMethodName());
             if(screenPath != null) {
                 test.get().addScreenCaptureFromPath(screenPath, "Screenshot Pass");
+                evidenceDocument.createBlueSubTitle("Test completado correctamente");
+                evidenceDocument.createParagraph(
+                        result.getMethod().getMethodName() + " - " + result.getMethod().getDescription());
+                evidenceDocument.addImage(screenPath);
             }
         }
     }
@@ -74,7 +83,10 @@ public class ExtentReportListener implements ITestListener {
                 DriverFactory.getDriver(), result.getMethod().getMethodName());
         if(screenshotPath != null) {
             test.get().addScreenCaptureFromPath(screenshotPath, "Screenshot Failed");
-            DocumentHelper.createDocument(screenshotPath);
+            evidenceDocument.createRedSubTitle("Test fallido");
+            evidenceDocument.createParagraph(
+                    result.getMethod().getMethodName() + " - " + result.getMethod().getDescription());
+            evidenceDocument.addImage(screenshotPath);
         }
     }
 
@@ -86,5 +98,6 @@ public class ExtentReportListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         extent.flush();
+        evidenceDocument.saveDocument("DocumentoEvidencias");
     }
 }

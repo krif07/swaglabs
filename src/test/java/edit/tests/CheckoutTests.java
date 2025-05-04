@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CheckoutTests extends Hooks {
-    @Test()
+    @Test(description = "Add Products to the cart")
     void testAddToCartProducts() {
         LoginPage loginPage = new LoginPage();
         loginPage.navigateTo(ReadProperties.getURL());
@@ -19,7 +19,7 @@ public class CheckoutTests extends Hooks {
         Assert.assertEquals("3", inventoryPage.getShoppingCartBadge());
     }
 
-    @Test()
+    @Test(description = "Checkout Cart Products")
     void testCheckoutCartProducts() {
         LoginPage loginPage = new LoginPage();
         loginPage.navigateTo(ReadProperties.getURL());
@@ -34,7 +34,7 @@ public class CheckoutTests extends Hooks {
         Assert.assertEquals(product2Title, cartPage.getProductTitle(2));
     }
 
-    @Test(description = "Test the generation of a purchase order")
+    @Test(description = "Generate Purchase Order")
     void testGeneratePurchaseOrder() {
         LoginPage loginPage = new LoginPage();
         loginPage.navigateTo(ReadProperties.getURL());

@@ -18,10 +18,17 @@ public class LoginPage extends BasePage {
     @FindBy(name = "login-button")
     private WebElement loginButton;
 
+    @FindBy(css = "h3[data-test='error']")
+    private WebElement errorMessageText;
+
     public InventoryPage loginSwagLabs(String username, String password) {
         sendKeys(usernameInput, username);
         sendKeys(passwordInput, password);
         click(loginButton);
         return new InventoryPage();
+    }
+
+    public String getErrorMessage() {
+        return getText(errorMessageText);
     }
 }

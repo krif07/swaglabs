@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Purchase order tests">
+    <listeners>
+        <listener class-name="edit.listeners.ExtentReportListener"/>
+    </listeners>
+    <test name="Login with invalid passwords" thread-count="3" parallel="true">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="edit.tests.LoginTests">
+                <methods>
+                    <include name="testAllInvalidUsers"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

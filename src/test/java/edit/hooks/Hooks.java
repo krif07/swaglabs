@@ -17,11 +17,7 @@ public class Hooks {
     @BeforeTest
     @Parameters("browser")
     public void beforeTest(String browser) {
-        System.out.println("2 ----------------------------------------------");
-        System.out.println(ReadProperties.getBrowserType());
         ReadProperties.setBrowserType(browser);
-        System.out.println(ReadProperties.getBrowserType());
-        System.out.println("2 ----------------------------------------------");
     }
     @BeforeMethod
     public void setup() {

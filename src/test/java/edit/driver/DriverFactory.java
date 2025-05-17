@@ -31,7 +31,8 @@ public class DriverFactory {
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("headless");
+                options.addArguments("--headless");
+                options.addArguments("incognito");
                 driver = new FirefoxDriver(options);
             }
             case "edge" -> {

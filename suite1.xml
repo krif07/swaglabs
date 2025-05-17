@@ -7,8 +7,8 @@
     <test name="Create orders" thread-count="3" parallel="true" preserve-order="true">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="edit.tests.CheckoutTests"/>
-            <class name="edit.tests.LoginTests">
+            <class name="edit.tests.TestCheckout"/>
+            <class name="edit.tests.TestLogin">
                 <methods>
                     <exclude name="testUnSuccessfulLogin"/>
                 </methods>
@@ -18,8 +18,8 @@
     <test name="Login to Swag Labs" thread-count="3" parallel="true">
         <parameter name="browser" value="edge"/>
         <classes>
-            <class name="edit.tests.CheckoutTests"/>
-            <class name="edit.tests.LoginTests"/>
+            <class name="edit.tests.TestCheckout"/>
+            <class name="edit.tests.TestLogin"/>
         </classes>
     </test>
 </suite>

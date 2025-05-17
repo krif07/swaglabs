@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class LoginTests extends Hooks {
+public class TestLogin extends Hooks {
 
     @DataProvider(name = "loginProvider")
     public Object[][] getUserPassword() {

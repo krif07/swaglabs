@@ -6,7 +6,7 @@ import edit.utils.ReadProperties;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CheckoutTests extends Hooks {
+public class TestCheckout extends Hooks {
     @Test(description = "Add Products to the cart")
     void testAddToCartProducts() {
         LoginPage loginPage = new LoginPage();

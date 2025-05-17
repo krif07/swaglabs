@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -23,6 +25,8 @@ public class DriverFactory {
         }
         WebDriver driver;
 
+        Map<String, String> prefs = new HashMap<>();
+        prefs.put("download.default_directory", "src/test/resources");
         switch (browser.toLowerCase()) {
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
@@ -39,7 +43,12 @@ public class DriverFactory {
             default -> {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
+                options.addArguments("start-maximized");
+                options.addArguments("incognito");
+                options.addArguments("disable-extensions");
+                options.addArguments("make-default-browser");
                 options.addArguments("--no-sandbox");
+                options.setExperimentalOption("prefs", prefs);
                 driver = new ChromeDriver(options);
             }
         }

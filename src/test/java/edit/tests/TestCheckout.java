@@ -1,6 +1,6 @@
 package edit.tests;
 
-import edit.hooks.Hooks;
+import stepDefinitions.hooks.Hooks;
 import edit.pages.*;
 import edit.utils.ReadProperties;
 import org.testng.Assert;
